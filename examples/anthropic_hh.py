@@ -47,14 +47,14 @@ class DebertaRewardModelForTrakAttribution(nn.Module):
 
         self.model.eval().cuda()
 
-    def forward(self, input_ids_chosen, token_type_id_chosen, attention_mask_chosen, input_ids_rejected,
-                token_type_id_rejected, attention_mask_rejected):
+    def forward(self, input_ids_chosen, token_type_ids_chosen, attention_mask_chosen, input_ids_rejected,
+                token_type_ids_rejected, attention_mask_rejected):
         rewards_chosen = self.model(
-            input_ids=input_ids_chosen, token_type_ids=token_type_id_chosen, attention_mask=attention_mask_chosen,
+            input_ids=input_ids_chosen, token_type_ids=token_type_ids_chosen, attention_mask=attention_mask_chosen,
         )[0]
 
         rewards_rejected = self.model(
-            input_ids=input_ids_rejected, token_type_ids=token_type_id_rejected, attention_mask=attention_mask_rejected,
+            input_ids=input_ids_rejected, token_type_ids=token_type_ids_rejected, attention_mask=attention_mask_rejected,
         )[0]
 
         return rewards_chosen - rewards_rejected
@@ -114,10 +114,10 @@ class ScriptArguments:
 def preprocess_function(examples):
     new_examples = {
         "input_ids_chosen": [],
-        "token_type_id_chosen": [],
+        "token_type_ids_chosen": [],
         "attention_mask_chosen": [],
         "input_ids_rejected": [],
-        "token_type_id_rejected": [],
+        "token_type_ids_rejected": [],
         "attention_mask_rejected": [],
     }
     for chosen, rejected in zip(examples["chosen"], examples["rejected"]):
@@ -128,8 +128,8 @@ def preprocess_function(examples):
             if "token_type_ids_chosen" not in new_examples:
                 new_examples["token_type_ids_chosen"] = []
                 new_examples["token_type_ids_rejected"] = []
-            new_examples["token_type_id_chosen"].append(tokenized_chosen["token_type_ids"])
-            new_examples["token_type_id_rejected"].append(tokenized_rejected["token_type_ids"])
+            new_examples["token_type_ids_chosen"].append(tokenized_chosen["token_type_ids"])
+            new_examples["token_type_ids_chosen"].append(tokenized_rejected["token_type_ids"])
 
         new_examples["input_ids_chosen"].append(tokenized_chosen["input_ids"])
         new_examples["attention_mask_chosen"].append(tokenized_chosen["attention_mask"])
@@ -162,8 +162,8 @@ def train():
 
 
 def process_batch(batch):
-    return (batch['input_ids_chosen'], batch['attention_mask_chosen'], batch['token_type_id_chosen'],
-            batch['input_ids_rejected'], batch['attention_mask_rejected'], batch['token_type_id_rejected'])
+    return (batch['input_ids_chosen'], batch['attention_mask_chosen'], batch['token_type_ids_chosen'],
+            batch['input_ids_rejected'], batch['attention_mask_rejected'], batch['token_type_ids_rejected'])
 
 
 def init_loaders(ds_train, ds_val, batch_size=16):

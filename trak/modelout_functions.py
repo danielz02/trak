@@ -402,13 +402,13 @@ class TextClassificationModelOutput(AbstractModelOutput):
         weights: Iterable[Tensor],
         buffers: Iterable[Tensor],
         input_id: Tensor,
-        token_type_id: Tensor,
+        token_type_ids: Tensor,
         attention_mask: Tensor,
         label: Tensor,
     ) -> Tensor:
         kw_inputs = {
             "input_ids": input_id.unsqueeze(0),
-            "token_type_ids": token_type_id.unsqueeze(0),
+            "token_type_ids": token_type_ids.unsqueeze(0),
             "attention_mask": attention_mask.unsqueeze(0),
         }
 
