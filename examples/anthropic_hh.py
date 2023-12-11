@@ -162,7 +162,8 @@ def train():
 
 
 def process_batch(batch):
-    return batch['input_ids'], batch['token_type_ids'], batch['attention_mask'], batch['labels']
+    return (batch['input_ids_chosen'], batch['attention_mask_chosen'], batch['token_type_id_chosen'],
+            batch['input_ids_rejected'], batch['attention_mask_rejected'], batch['token_type_id_rejected'])
 
 
 def init_loaders(ds_train, ds_val, batch_size=16):
