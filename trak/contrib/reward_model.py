@@ -38,7 +38,7 @@ class RLHFRewardModelingOutput(AbstractModelOutput):
             model, (weights, buffers), args=(), kwargs=kw_inputs
         )
 
-        return reward_difference.sum().unsqueeze(-1)
+        return reward_difference.sum().squeeze(-1)
 
     def get_out_to_loss_grad(self, model, weights, buffers, batch: Iterable[Tensor]) -> Tensor:
         (input_ids_chosen, token_type_ids_chosen, attention_mask_chosen, input_ids_rejected, token_type_ids_rejected,
