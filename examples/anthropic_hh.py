@@ -184,7 +184,7 @@ def attribute():
                     train_set_size=args.train_size,
                     save_dir=args.out,
                     device=device,
-                    proj_dim=1024)
+                    proj_dim=256)
 
     traker.load_checkpoint(model.state_dict(), model_id=0)
     for batch in tqdm(loader_train, desc='Featurizing..'):
