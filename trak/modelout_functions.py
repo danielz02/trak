@@ -21,8 +21,6 @@ from torch import Tensor
 from torch.nn import Module
 import torch as ch
 
-from trak.contrib.reward_model import RLHFRewardModelingOutput
-
 
 class AbstractModelOutput(ABC):
     """See, e.g. `this tutorial <https://trak.readthedocs.io/en/latest/clip.html>`_
