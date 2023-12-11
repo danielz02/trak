@@ -187,7 +187,7 @@ def attribute():
     model = DebertaRewardModelForTrakAttribution(args.model_name)
 
     traker = TRAKer(model=model,
-                    task=RLHFRewardModelingOutput,
+                    task=RLHFRewardModelingOutput(),
                     train_set_size=args.train_size,
                     save_dir=args.out,
                     device=device,
