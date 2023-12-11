@@ -107,6 +107,7 @@ class ScriptArguments:
 
     train_size: int = 50_000
     val_size: int = 5_463
+    out: str = "./results"
 
 
 # Tokenize chosen/rejected pairs of inputs
