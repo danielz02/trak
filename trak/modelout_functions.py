@@ -175,7 +175,7 @@ class ImageClassificationModelOutput(AbstractModelOutput):
         ps = self.softmax(logits / self.loss_temperature)[
             ch.arange(logits.size(0)), labels
         ]
-        return (1 - ps).clone().detach().unsqueeze(-1)
+        return (1 - ps).clone().detach()
 
 
 class CLIPModelOutput(AbstractModelOutput):
