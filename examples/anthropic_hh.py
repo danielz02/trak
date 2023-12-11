@@ -27,6 +27,7 @@ from transformers import AutoModelForSequenceClassification, AutoTokenizer, Bits
 from trl import RewardConfig, RewardTrainer, is_xpu_available
 
 from trak import TRAKer
+from trak.contrib.reward_model import RLHFRewardModelingOutput
 
 tqdm.pandas()
 
@@ -177,7 +178,7 @@ def attribute():
     model = DebertaRewardModelForTrakAttribution(args.model_name)
 
     traker = TRAKer(model=model,
-                    task="reward_modeling",
+                    task=RLHFRewardModelingOutput,
                     train_set_size=args.train_size,
                     save_dir=args.out,
                     device=device,

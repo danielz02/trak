@@ -450,5 +450,4 @@ TASK_TO_MODELOUT = {
     "image_classification": ImageClassificationModelOutput,
     "clip": CLIPModelOutput,
     "text_classification": TextClassificationModelOutput,
-    "reward_modeling": RLHFRewardModelingOutput
 }
