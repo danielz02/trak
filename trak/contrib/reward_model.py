@@ -20,17 +20,17 @@ class RLHFRewardModelingOutput(AbstractModelOutput):
         buffers: Iterable[Tensor],
         input_ids_chosen: Tensor,
         attention_mask_chosen: Tensor,
-        token_type_id_chosen: Tensor,
+        token_type_ids_chosen: Tensor,
         input_ids_rejected: Tensor,
         attention_mask_rejected: Tensor,
-        token_type_id_rejected: Tensor,
+        token_type_ids_rejected: Tensor,
     ) -> Tensor:
         kw_inputs = {
             "input_ids_chosen": input_ids_chosen.unsqueeze(0),
-            "token_type_id_chosen": token_type_id_chosen.unsqueeze(0),
+            "token_type_ids_chosen": token_type_ids_chosen.unsqueeze(0),
             "attention_mask_chosen": attention_mask_chosen.unsqueeze(0),
             "input_ids_rejected": input_ids_rejected.unsqueeze(0),
-            "token_type_id_rejected": token_type_id_rejected.unsqueeze(0),
+            "token_type_ids_rejected": token_type_ids_rejected.unsqueeze(0),
             "attention_mask_rejected": attention_mask_rejected.unsqueeze(0),
         }
 
@@ -41,14 +41,14 @@ class RLHFRewardModelingOutput(AbstractModelOutput):
         return reward_difference.sum()
 
     def get_out_to_loss_grad(self, model, weights, buffers, batch: Iterable[Tensor]) -> Tensor:
-        (input_ids_chosen, token_type_id_chosen, attention_mask_chosen, input_ids_rejected, token_type_id_rejected,
+        (input_ids_chosen, token_type_ids_chosen, attention_mask_chosen, input_ids_rejected, token_type_ids_rejected,
          attention_mask_rejected) = batch
         kw_inputs = {
             "input_ids_chosen": input_ids_chosen,
-            "token_type_id_chosen": token_type_id_chosen,
+            "token_type_ids_chosen": token_type_ids_chosen,
             "attention_mask_chosen": attention_mask_chosen,
             "input_ids_rejected": input_ids_rejected,
-            "token_type_id_rejected": token_type_id_rejected,
+            "token_type_ids_rejected": token_type_ids_rejected,
             "attention_mask_rejected": attention_mask_rejected,
         }
 
