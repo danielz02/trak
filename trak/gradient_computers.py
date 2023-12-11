@@ -151,6 +151,7 @@ class FunctionalGradientComputer(AbstractGradientComputer):
             grads_loss,
             in_dims=(None, None, None, *([0] * len(batch))),
             randomness="different",
+            generate_vmap_rule=True
         )(self.model, self.func_weights, self.func_buffers, *batch)
 
         if self.grad_wrt is not None:
