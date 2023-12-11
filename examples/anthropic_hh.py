@@ -124,7 +124,7 @@ def preprocess_function(examples):
         tokenized_chosen = tokenizer(chosen)
         tokenized_rejected = tokenizer(rejected)
 
-        if "token_type_ids_chosen" in tokenized_chosen:
+        if "token_type_ids" in tokenized_chosen:
             if "token_type_ids_chosen" not in new_examples:
                 new_examples["token_type_ids_chosen"] = []
                 new_examples["token_type_ids_rejected"] = []
