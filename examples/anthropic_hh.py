@@ -267,7 +267,8 @@ if __name__ == "__main__":
     )
     train_dataset = train_dataset.filter(
         lambda x: len(x["input_ids_chosen"]) <= args.reward_config.max_length and
-                  len(x["input_ids_rejected"]) <= args.reward_config.max_length
+                  len(x["input_ids_rejected"]) <= args.reward_config.max_length,
+        num_proc=16
     )
 
     attribute()
