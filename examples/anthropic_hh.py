@@ -43,7 +43,7 @@ class DebertaRewardModelForTrakAttribution(nn.Module):
         self.model = AutoModelForSequenceClassification.from_pretrained(
             model_id,
             ignore_mismatched_sizes=False,
-            torch_dtye=torch.bfloat16,
+            torch_dtype=torch.float16,
             **kwargs
         )
 
@@ -110,7 +110,7 @@ class ScriptArguments:
     train_size: int = 50_000
     val_size: int = 5_463
     out: str = "./results"
-    proj_dim: str = 1024
+    proj_dim: int = 1024
 
 
 # Tokenize chosen/rejected pairs of inputs
