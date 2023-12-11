@@ -245,7 +245,7 @@ if __name__ == "__main__":
         eval_dataset = eval_dataset.map(
             preprocess_function,
             batched=True,
-            num_proc=4,
+            num_proc=8,
         )
         eval_dataset = eval_dataset.filter(
             lambda x: len(x["input_ids_chosen"]) <= args.reward_config.max_length
