@@ -129,7 +129,7 @@ def preprocess_function(examples):
                 new_examples["token_type_ids_chosen"] = []
                 new_examples["token_type_ids_rejected"] = []
             new_examples["token_type_ids_chosen"].append(tokenized_chosen["token_type_ids"])
-            new_examples["token_type_ids_chosen"].append(tokenized_rejected["token_type_ids"])
+            new_examples["token_type_ids_rejected"].append(tokenized_rejected["token_type_ids"])
 
         new_examples["input_ids_chosen"].append(tokenized_chosen["input_ids"])
         new_examples["attention_mask_chosen"].append(tokenized_chosen["attention_mask"])
