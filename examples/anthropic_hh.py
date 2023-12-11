@@ -249,7 +249,8 @@ if __name__ == "__main__":
         )
         eval_dataset = eval_dataset.filter(
             lambda x: len(x["input_ids_chosen"]) <= args.reward_config.max_length
-                      and len(x["input_ids_rejected"]) <= args.reward_config.max_length
+                      and len(x["input_ids_rejected"]) <= args.reward_config.max_length,
+            num_proc=8
         )
 
     # Step 4: Define the LoraConfig
