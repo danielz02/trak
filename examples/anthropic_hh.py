@@ -110,6 +110,7 @@ class ScriptArguments:
     train_size: int = 50_000
     val_size: int = 5_463
     out: str = "./results"
+    proj_dim: str = 1024
 
 
 # Tokenize chosen/rejected pairs of inputs
@@ -186,7 +187,7 @@ def attribute():
                     train_set_size=args.train_size,
                     save_dir=args.out,
                     device=device,
-                    proj_dim=256)
+                    proj_dim=args.proj_dim)
 
     traker.load_checkpoint(model.state_dict(), model_id=0)
     for batch in tqdm(loader_train, desc='Featurizing..'):
