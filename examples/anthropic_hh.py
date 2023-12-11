@@ -124,9 +124,13 @@ def preprocess_function(examples):
         "token_type_ids_rejected": [],
         "attention_mask_rejected": [],
     }
+
+    tokenizer_options = dict(
+        padding="max_length", max_length=128, truncation=True
+    )
     for chosen, rejected in zip(examples["chosen"], examples["rejected"]):
-        tokenized_chosen = tokenizer(chosen)
-        tokenized_rejected = tokenizer(rejected)
+        tokenized_chosen = tokenizer(chosen, **tokenizer_options)
+        tokenized_rejected = tokenizer(rejected, **tokenizer_options)
 
         if "token_type_ids" in tokenized_chosen:
             if "token_type_ids_chosen" not in new_examples:
