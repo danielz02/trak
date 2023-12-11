@@ -15,6 +15,7 @@
 from dataclasses import dataclass, field
 from typing import Optional
 
+import torch
 import tyro
 from accelerate import Accelerator
 from datasets import load_dataset
@@ -42,6 +43,7 @@ class DebertaRewardModelForTrakAttribution(nn.Module):
         self.model = AutoModelForSequenceClassification.from_pretrained(
             model_id,
             ignore_mismatched_sizes=False,
+            torch_dtye=torch.bfloat16,
             **kwargs
         )
 
