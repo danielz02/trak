@@ -245,12 +245,12 @@ if __name__ == "__main__":
         eval_dataset = eval_dataset.map(
             preprocess_function,
             batched=True,
-            num_proc=8,
+            num_proc=16,
         )
         eval_dataset = eval_dataset.filter(
             lambda x: len(x["input_ids_chosen"]) <= args.reward_config.max_length
                       and len(x["input_ids_rejected"]) <= args.reward_config.max_length,
-            num_proc=8
+            num_proc=16
         )
 
     # Step 4: Define the LoraConfig
@@ -263,7 +263,7 @@ if __name__ == "__main__":
     train_dataset = train_dataset.map(
         preprocess_function,
         batched=True,
-        num_proc=4,
+        num_proc=16,
     )
     train_dataset = train_dataset.filter(
         lambda x: len(x["input_ids_chosen"]) <= args.reward_config.max_length and
